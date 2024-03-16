@@ -1,0 +1,6 @@
+# Generated...
+.idea/
+*.txt
+
+# Dev assets...
+.code/
