@@ -50,4 +50,30 @@ v20.11.1
 
 junkie@cybertron:~$ npm -v
 10.2.4
+
+junkie@cybertron:~$ ng version
+
+     _                      _                 ____ _     ___
+    / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
+   / △ \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
+  / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
+ /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
+                |___/
+    
+
+Angular CLI: 13.0.4
+Node: 20.11.1 (Unsupported)
+Package Manager: npm 10.2.4
+OS: linux x64
+
+Angular: 
+... 
+
+Package                      Version
+------------------------------------------------------
+@angular-devkit/architect    0.1300.4 (cli-only)
+@angular-devkit/core         13.0.4 (cli-only)
+@angular-devkit/schematics   13.0.4 (cli-only)
+@schematics/angular          13.0.4 (cli-only)
+
 ```
