@@ -16,7 +16,7 @@ Notes...
 * Chapter 08  
 I steered cleared of Certs and Docker... did not seem particularly `Angular` specific.
 * Chapter 09  
-Strangest sentence I've read... wait... what... no git?  
+Strangest sentence I've ever read... wait... what... no git?  
 _&quot;I tend to remove the README.md, .editorconfig, and .gitignore files, for example, 
 because I am already familiar with the tool commands, I prefer not to override my 
 editor settings, **and I don’t use Git for version control.**&quot;_
