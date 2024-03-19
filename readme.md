@@ -13,6 +13,8 @@ is just one of them from my [playlist](https://learning.oreilly.com/playlists/0e
 
 Notes...
 ---
+* Chapter 08  
+I steered cleared of Certs and Docker... did not seem particularly `Angular` specific.
 
 Box...
 ---
