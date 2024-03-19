@@ -8,6 +8,7 @@ import { Cart } from "./cart.model";
 import { Order } from "./order.model";
 import { OrderRepository } from "./order.repository";
 import { AuthService } from "./auth.service";
+import { ConnectionService } from "./connection.service";
 
 @NgModule({
   imports: [HttpClientModule],
@@ -22,7 +23,8 @@ import { AuthService } from "./auth.service";
       useClass: RestDataSource
     },
     RestDataSource,
-    AuthService
+    AuthService,
+    ConnectionService
   ]
 })
 export class ModelModule {}

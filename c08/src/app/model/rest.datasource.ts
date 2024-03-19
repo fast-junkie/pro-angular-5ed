@@ -20,7 +20,7 @@ export class RestDataSource {
   }
 
   constructor(private http: HttpClient) {
-    this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
+    this.baseUrl = "/api/"; // `${PROTOCOL}://${location.hostname}:${PORT}/`;
   }
 
   getProducts(): Observable<Product[]> {
