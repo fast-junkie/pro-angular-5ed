@@ -8,6 +8,7 @@ import { StoreComponent } from './store/store.component';
 import { CartDetailComponent } from './store/cartDetail.component';
 import { CheckoutComponent } from './store/checkout.component';
 import { StoreFirstGuard } from './storeFirst.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,10 +32,16 @@ import { StoreFirstGuard } from './storeFirst.guard';
         canActivate: [StoreFirstGuard]
       },
       {
+        path: "admin",
+        loadChildren: () => import("./admin/admin.module").then((m) => m.AdminModule),
+        canActivate: [StoreFirstGuard]
+      },
+      {
         path: "**",
         redirectTo: "/store"
       },
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [StoreFirstGuard],
   bootstrap: [AppComponent]

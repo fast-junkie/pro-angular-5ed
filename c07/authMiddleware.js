@@ -1,8 +1,8 @@
 const jsonWebToken = require('jsonwebtoken');
 
-const APP_SECRET = 'TahquaW3 Eiwe1ois uZ2uuruo aCaeFo8o Ohphie6b HahG2nei EiD4jahd Aighu4ei';
+const APP_SECRET = 'myappsecret';
 const USERNAME = 'admin';
-const PASSWORD = 'eu4eeTe1 iQuoh8ii';
+const PASSWORD = 'secret';
 
 const mappings = {
   get: ['/api/orders', '/orders'],
@@ -16,7 +16,7 @@ function requiresAuth(method, url) {
 module.exports = function (req, res, next) {
   if (req.url.endsWith('/login') && req.method == 'POST') {
     if (req.body && req.body.name == USERNAME && req.body.password == PASSWORD) {
-      let token = jwt.sign({ data: USERNAME, expiresIn: '1h' }, APP_SECRET);
+      let token = jsonWebToken.sign({ data: USERNAME, expiresIn: '1h' }, APP_SECRET);
       res.json({ success: true, token: token });
     } else {
       res.json({ success: false });
@@ -28,7 +28,7 @@ module.exports = function (req, res, next) {
     if (token.startsWith('Bearer<')) {
       token = token.substring(7, token.length - 1);
       try {
-        jwt.verify(token, APP_SECRET);
+        jsonWebToken.verify(token, APP_SECRET);
         next();
         return;
       } catch (err) { }
