@@ -4,20 +4,18 @@ import { SimpleDataSource } from "./datasource.model";
 export class Model {
   private dataSource: SimpleDataSource;
   private products: Product[];
-  private locator = (p: Product, id: number | any) => p.id == id;
-
-  private generateID(): number {
-    let candidate = 100;
-    while (this.getProduct(candidate) != null) {
-      candidate++;
-    }
-    return candidate;
-  }
 
   constructor() {
     this.dataSource = new SimpleDataSource();
     this.products = new Array<Product>();
     this.dataSource.getData().forEach((p) => this.products.push(p));
+  }
+
+  swapProduct() {
+    const p = this.products.shift();
+    if (p != null) {
+      this.products.push(new Product(p.id, p.name, p.category, p.price));
+    }
   }
 
   getProducts(): Product[] {
@@ -29,7 +27,7 @@ export class Model {
   }
 
   saveProduct(product: Product) {
-    if (product.id == 0 || product.id == null) {
+    if (product.id === 0 || product.id == null) {
       product.id = this.generateID();
       this.products.push(product);
     } else {
@@ -43,5 +41,15 @@ export class Model {
     if (index > -1) {
       this.products.splice(index, 1);
     }
+  }
+
+  private locator = (p: Product, id: number | any) => p.id === id;
+
+  private generateID(): number {
+    let candidate = 100;
+    while (this.getProduct(candidate) != null) {
+      candidate++;
+    }
+    return candidate;
   }
 }
