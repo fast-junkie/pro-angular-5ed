@@ -1,33 +1,26 @@
-import { ApplicationRef, Component } from "@angular/core";
+import { Component } from "@angular/core";
+import { NgForm, NgModel, ValidationErrors } from "@angular/forms";
 
 import { Model } from "./repository.model";
 import { Product } from "./product.model";
 
 @Component({
-  selector: "app",
+  selector: "app-template",
   templateUrl: "template.html"
 })
 
 export class ProductComponent {
   model: Model = new Model();
-  targetName = "Kayak";
-  counter: number = 1;
+  formSubmitted: boolean = false;
 
-  constructor(ref: ApplicationRef) {
-    (<any>window).appRef = ref;
-    (<any>window).model = this.model;
-  }
-
-  get nextProduct(): Product | undefined {
-    return this.model.getProducts().shift();
-  }
-
-  getProductPrice(index: number): number {
-    return Math.floor(this.getProduct(index)?.price ?? 0);
-  }
-
-  getKey(index: number, product: Product): number | undefined {
-    return product.id;
+  submitForm(form: NgForm) {
+    this.formSubmitted = true;
+    if (form.valid) {
+      this.addProduct(this.newProduct);
+      this.newProduct = new Product();
+      form.resetForm();
+      this.formSubmitted = false;
+    }
   }
 
   getProduct(key: number): Product | undefined {
@@ -35,25 +28,51 @@ export class ProductComponent {
   }
 
   getProducts(): Product[] {
-    console.debug('getProducts...');
     return this.model.getProducts();
   }
 
-  getProductCount(): number {
-    return this.getProducts().length;
+  newProduct: Product = new Product();
+
+  get jsonProduct(): string {
+    return JSON.stringify(this.newProduct);
   }
 
-  getProductByPosition(position: number): Product {
-    return this.model.getProducts()[position];
+  addProduct(p: Product): void {
+    console.debug('New Product: %o', this.jsonProduct);
   }
 
-  getClassesByPosition(position: number): string {
-    const product = this.getProductByPosition(position);
-    return "p-2 " + ((product?.price ?? 0) < 50 ? "bg-dark" : "bg-warning");
+  getMessages(errs : ValidationErrors | null, name: string) : string[] {
+    const messages: string[] = [];
+    for (let errorName in errs) {
+      switch (errorName) {
+        case "required":
+          messages.push(`You must enter a ${name}`);
+          break;
+        case "minlength":
+          messages.push(`A ${name} must be at least ${errs['minlength'].requiredLength} characters`);
+          break;
+        case "pattern":
+          messages.push(`The ${name} contains illegal characters`);
+          break;
+      }
+    }
+    return messages;
   }
 
-  getClasses(key: number): string {
-    const product = this.model.getProduct(key);
-    return "p-3 " + ((product?.price ?? 0) < 50 ? "bg-secondary" : "bg-warning");
+  getValidationMessages(state: NgModel, thingName?: string): string[] {
+    const thing: string = state.path?.[0] ?? thingName;
+    return this.getMessages(state.errors, thing)
+  }
+
+  getFormValidationMessages(form: NgForm): string[] {
+    const messages: string[] = [];
+    Object
+      .keys(form.controls)
+      .forEach((k) => {
+        this
+          .getMessages(form.controls[k].errors, k)
+          .forEach((m) => messages.push(m));
+      });
+    return messages;
   }
 }

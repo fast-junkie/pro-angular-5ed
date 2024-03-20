@@ -1,47 +1,21 @@
-<div class="container">
-  <div class="text-white">
-    <ng-template #titleTemplate let-text="title">
-      <h4 class="p-3 mt-3 bg-success text-white">{{text}}</h4>
-    </ng-template>
-    <ng-template [ngTemplateOutlet]="titleTemplate" [ngTemplateOutletContext]="{title: 'Header'}"></ng-template>
-    <div class="bg-dark p-3">
-      <p>There are {{getProductCount()}} products.</p>
-      <p>
-        Product Names:
-        <ng-container *ngFor="let item of getProducts(); let last = last">
-          {{item.name}}<ng-container *ngIf="!last">,</ng-container>
-        </ng-container>
-      </p>
-      <p>The rounded price is {{getProductPrice(2)}}</p>
+<div class="container mt-3">
+  <form #form="ngForm" (ngSubmit)="submitForm(form)">
+    <div class="alert alert-danger" *ngIf="formSubmitted && form.invalid">
+      There are problems with the form
+      <ul><li *ngFor="let error of getFormValidationMessages(form)">{{error}}</li></ul>
     </div>
-    <ng-template [ngTemplateOutlet]="titleTemplate" [ngTemplateOutletContext]="{title: 'Body'}"></ng-template>
-
-    <div class="bg-dark p-3 mt-3" [ngSwitch]="getProduct(1)?.name">
-      <span *ngSwitchCase="targetName">Kayak</span>
-      <span *ngSwitchCase="'Lifejacket'">Lifejacket</span>
-      <span *ngSwitchDefault>Other Product</span>
+    <div class="form-group">
+      <label for="">Name</label>
+      <input name="name" class="form-control" #name="ngModel" [(ngModel)]="newProduct.name" minlength="5" pattern="^[A-za-z ]+$" required />
     </div>
-
-    <div class="p-3">
-      <table class="table table-sm table-bordered text-dark">
-        <thead>
-          <tr><th>#</th><th>Name</th><th>Category</th><th>Price</th></tr>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor="let item of getProducts();let i = index;let c = count;let odd = odd;let last = last;let first = first;trackBy:getKey"
-            class="text-white"
-            [class.bg-dark]="odd"
-            [class.bg-secondary]="!odd"
-            [class.bg-danger]="first || last">
-            <td>{{i + 1}} of {{c}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.category}}</td>
-            <td>{{item.price}}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="form-group">
+      <label for="">Category</label>
+      <input name="category" class="form-control" [(ngModel)]="newProduct.category" required />
     </div>
-    <ng-template [ngTemplateOutlet]="titleTemplate" [ngTemplateOutletContext]="{title: 'Footer'}"></ng-template>
-  </div>
+    <div class="form-group">
+      <label for="">Price</label>
+      <input  type="number" name="price" class="form-control" [(ngModel)]="newProduct.price" required />
+    </div>
+    <button type="submit" class="btn btn-dark mt-3" [disabled]="formSubmitted && form.invalid">Create</button>
+  </form>
 </div>
