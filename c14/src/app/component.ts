@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NgForm, NgModel, ValidationErrors } from "@angular/forms";
+import { NgForm } from "@angular/forms";
 
 import { Model } from "./repository.model";
 import { Product } from "./product.model";
@@ -12,6 +12,8 @@ import { Product } from "./product.model";
 export class ProductComponent {
   model: Model = new Model();
   newProduct: Product = new Product();
+  showTable: boolean = false;
+  darkColor: boolean = false;
 
   getProduct(key: number): Product | undefined {
     return this.model.getProduct(key);
@@ -23,6 +25,10 @@ export class ProductComponent {
 
   addProduct(p: Product): void {
     this.model.saveProduct(p);
+  }
+
+  deleteProduct(key: number): void {
+    this.model.deleteProduct(key);
   }
 
   submitForm(form: NgForm) {

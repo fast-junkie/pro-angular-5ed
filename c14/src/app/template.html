@@ -18,24 +18,21 @@
       </form>
     </div>
     <div class="col">
-      <div class="form-group">
-        <label for="">Name</label>
-        <input class="form-control" #paModel="paModel" [(paModel)]="newProduct.name" />
-        <p>Direction: {{paModel.direction}}</p>
+      <div class="form-check">
+        <label for="dark-color" class="form-check-label">Dark Cell Color</label>
+        <input type="checkbox" id="dark-color" class="form-check-input" [(ngModel)]="darkColor" />
       </div>
-      <table class="table table-sm table-striped">
+      <table class="table table-sm table-striped" [paCellDarkColor]="darkColor">
         <thead>
-          <tr><th>#</th><th>Name</th><th>Category</th><th>Price</th></tr>
+          <tr><th>#</th><th>Name</th><th>Category</th><th>Price</th><th>Action</th></tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of getProducts();let i = index;"
-              [pa-attr]="getProducts().length < 6 ? 'table-success' : 'table-warning'"
-              [pa-product]="item"
-              (pa-category)="newProduct.category = $event">
+          <tr *paFor="let item of getProducts();let i = index;let odd = odd;let even = even" [class.table-secondary]="odd" [class.table-success]="even">
             <td>{{i + 1}}</td>
             <td>{{item.name}}</td>
-            <td [pa-attr]="item.category == 'Soccer' ? 'table-info' : null">{{item.category}}</td>
-            <td [pa-attr]="'table-info'">{{item.price | currency: "USD": "symbol": "2.2-2"}}</td>
+            <td>{{item.category}}</td>
+            <td class="text-end">{{item.price | currency: "USD": "symbol": "2.2-2"}}</td>
+            <td class="text-center"><button class="btn btn-sm btn-link" (click)="deleteProduct(item.id)">Delete</button></td>
           </tr>
         </tbody>
       </table>
