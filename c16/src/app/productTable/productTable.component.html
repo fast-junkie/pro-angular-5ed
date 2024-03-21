@@ -1,0 +1,14 @@
+<table class="table table-bordered">
+  <thead>
+    <tr><th>#</th><th>Name</th><th>Category</th><th colspan="2">Price</th></tr>
+  </thead>
+  <tbody>
+    <tr *paFor="let item of getProducts();let i = index;let odd = odd;let even = even" [class.table-secondary]="odd" [class.table-light]="even">
+      <td>{{i + 1}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.category}}</td>
+      <td class="text-end">{{item.price | currency: "USD": "symbol": "2.2-2"}}</td>
+      <td class="text-center"><button class="btn btn-sm btn-link" (click)="deleteProduct(item.id)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
