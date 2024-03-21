@@ -1,41 +1,12 @@
-<div class="container mt-3">
-  <div class="row">
-    <div class="col-6">
-      <form #form="ngForm" (ngSubmit)="submitForm(form)">
-        <div class="form-group">
-          <label for="">Name</label>
-          <input name="name" class="form-control" [(ngModel)]="newProduct.name" />
-        </div>
-        <div class="form-group">
-          <label for="">Category</label>
-          <input name="category" class="form-control" [(ngModel)]="newProduct.category" />
-        </div>
-        <div class="form-group">
-          <label for="">Price</label>
-          <input  type="number" name="price" class="form-control" [(ngModel)]="newProduct.price" />
-        </div>
-        <button type="submit" class="btn btn-dark mt-3">Create</button>
-      </form>
+<div class="container-fluid mt-3">
+  <div class="row p-3">
+    <div class="col-12 col-md-4 p-3">
+      <pa-productform (paNewProduct)="addProduct($event)"></pa-productform>
     </div>
-    <div class="col">
-      <div class="form-check">
-        <label for="dark-color" class="form-check-label">Dark Cell Color</label>
-        <input type="checkbox" id="dark-color" class="form-check-input" [(ngModel)]="darkColor" />
-      </div>
-      <table class="table table-sm table-striped" [paCellDarkColor]="darkColor">
-        <thead>
-          <tr><th>#</th><th>Name</th><th>Category</th><th>Price</th><th>Action</th></tr>
-        </thead>
-        <tbody>
-          <tr *paFor="let item of getProducts();let i = index;let odd = odd;let even = even" [class.table-secondary]="odd" [class.table-success]="even">
-            <td>{{i + 1}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.category}}</td>
-            <td class="text-end">{{item.price | currency: "USD": "symbol": "2.2-2"}}</td>
-            <td class="text-center"><button class="btn btn-sm btn-link" (click)="deleteProduct(item.id)">Delete</button></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col-12 col-md-8 p-3">
+      <paToggleView>
+        <paProductTable [model]="model"></paProductTable>
+      </paToggleView>
     </div>
   </div>
 </div>
