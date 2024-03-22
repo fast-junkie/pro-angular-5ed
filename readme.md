@@ -20,6 +20,10 @@ Strangest sentence I've ever read... wait... what... no git?
 _&quot;I tend to remove the README.md, .editorconfig, and .gitignore files, for example, 
 because I am already familiar with the tool commands, I prefer not to override my 
 editor settings, **and I don’t use Git for version control.**&quot;_
+* Chapter 18  
+Though I have ample `AngularJS` experience... this is my first run with `Angular`.
+So I noted Mr. Freeman's `dependency injection` recommendation and skipped
+the chapter... 🤷🏻‍♂️
 
 Box...
 ---
