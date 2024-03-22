@@ -1,0 +1,10 @@
+<div class="container-fluid mt-3">
+  <div class="row p-3">
+    <div class="col-12 col-md-4 p-3">
+      <pa-productform (paNewProduct)="addProduct($event)"></pa-productform>
+    </div>
+    <div class="col-12 col-md-8 p-3">
+      <paProductTable [model]="model"></paProductTable>
+    </div>
+  </div>
+</div>
