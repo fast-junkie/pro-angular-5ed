@@ -1,14 +1,58 @@
+<!--
+<table class="table table-bordered table-striped">
+  <thead><tr><th>Name</th><th>Category</th><th>Message</th></tr></thead>
+  <tbody>
+      <tr *paFor="let item of getProducts()">
+          <td>{{ item.name }}</td>
+          <td>{{ item.category }}</td>
+          <td>Helps you {{ item.category | i18nSelect:selectMap }} </td>
+      </tr>
+  </tbody>
+</table>
+
+<div>There are {{ 1 | i18nPlural:numberMap }} </div>
+<div>There are {{ 2 | i18nPlural:numberMap }} </div>
+<div>There are {{ 100 | i18nPlural:numberMap }} </div>
+
+<div class="form-group mb-3">
+  <label for="tax-rate">Tax Rate:</label>
+  <select class="form-select" [value]="taxRate || 0" (change)="taxRate=$any($event).target.value">
+    <option value="0">None</option>
+    <option value="10">{{ 0.1 | percent }}</option>
+    <option value="20">{{ 0.2 | percent }}</option>
+    <option value="50">{{ 0.5 | percent }}</option>
+    <option value="150">{{ 1.5 | percent }}</option>
+  </select>
+</div>
+<div class="form-group mb-3">
+  <label for="category-filter">Category Filter:</label>
+  <select id="category-filter" class="form-select" [(ngModel)]="categoryFilter">
+    <option>Watersports</option>
+    <option>Soccer</option>
+    <option>Chess</option>
+  </select>
+</div>
+<div class="form-group mb-3">
+  <label for="number-of-items">Number of items:</label>
+  <select id="number-of-items" class="form-select" [value]="itemCount || 1" (change)="itemCount=$any($event).target.value">
+    <option *ngFor="let item of getProducts();let i = index;" [selected]="(i + 1) === itemCount">{{i + 1}}</option>
+  </select>
+</div> -->
+
+<div class="bg-light mb-3 p-3">
+  <p>Counter: {{numbers | async | currency:"USD":"symbol":"2.2-2"}}</p>
+</div>
 <table class="table table-bordered">
   <thead>
-    <tr><th>#</th><th>Name</th><th>Category</th><th colspan="2">Price</th></tr>
+    <tr><th>#</th><th>Name</th><th>Category</th><th>Price</th><th>Action</th></tr>
   </thead>
   <tbody>
     <tr *paFor="let item of getProducts();let i = index;let odd = odd;let even = even" [class.table-secondary]="odd" [class.table-light]="even">
       <td>{{i + 1}}</td>
-      <td>{{item.name}}</td>
-      <td>{{item.category}}</td>
-      <td class="text-end">{{item.price | currency: "USD": "symbol": "2.2-2"}}</td>
-      <td class="text-center"><button class="btn btn-sm btn-link" (click)="deleteProduct(item.id)">Delete</button></td>
+      <td>{{item.name | titlecase}}</td>
+      <td>{{item.category | uppercase}}</td>
+      <td class="text-end">{{item.price | addTax:(taxRate) | currency:"USD":"symbol":"2.2-2"}}</td>
+      <td><button class="btn btn-sm btn-link" (click)="deleteProduct(item.id)">Delete</button></td>
     </tr>
   </tbody>
 </table>

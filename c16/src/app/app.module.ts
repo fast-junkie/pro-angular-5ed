@@ -12,6 +12,8 @@ import { PaCellColorSwitcher } from './cellColorSwitcher.directive';
 import { ProductFormComponent } from './productForm/productForm.component';
 import { ProductTableComponent } from './productTable/productTable.component';
 import { PaToggleView } from './toggleView/toggleView.component';
+import { PaAddTaxPipe } from './addTax.pipe';
+import { PaCategoryFilterPipe } from './categoryFilter.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { PaToggleView } from './toggleView/toggleView.component';
     PaCellColorSwitcher,
     ProductFormComponent,
     ProductTableComponent,
-    PaToggleView
+    PaToggleView,
+    PaAddTaxPipe,
+    PaCategoryFilterPipe
   ],
   imports: [
     BrowserModule,

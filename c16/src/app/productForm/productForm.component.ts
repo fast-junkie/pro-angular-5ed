@@ -4,8 +4,6 @@ import { Product } from "../product.model";
 @Component({
   selector: "pa-productform",
   templateUrl: "productForm.component.html",
-  styleUrls: ["productForm.component.css"],
-  encapsulation: ViewEncapsulation.ShadowDom
 })
 
 export class ProductFormComponent {
