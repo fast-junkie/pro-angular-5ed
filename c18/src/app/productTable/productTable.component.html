@@ -1,0 +1,16 @@
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr><th>#</th><th>Name</th><th>Category</th><th>Price</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr *paFor="let item of getProducts();let i = index;">
+      <td>{{i + 1}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.category}}</td>
+      <td class="text-end" [pa-price]="item.price" #discount="discount">
+        {{ discount.discountAmount | currency:"USD":"symbol"}}
+      </td>
+      <td><button class="btn btn-sm btn-link" (click)="deleteProduct(item.id)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
