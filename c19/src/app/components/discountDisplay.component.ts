@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { DiscountService } from "./discount.service";
+import { DiscountService } from "../common/discount.service";
 
 @Component({
   selector: "paDiscountDisplay",
